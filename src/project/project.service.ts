@@ -32,8 +32,15 @@ export class ProjectService {
 
     async remove(id: number): Promise<void> {
         try {
+            const project = await this.projectsRepository.findOne(id);
+
+            for (let photo of project.photos) {
+                await this.photoService.remove(photo.id);
+            }
+
             await this.projectsRepository.delete(id);
-        } catch {
+        } catch (e) {
+            console.log(e);
             throw new BadRequestException('Project cannot be deleted');
         }
     }

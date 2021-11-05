@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { FindOneDto } from 'src/dto/findone.dto';
 import { ProjectDto } from 'src/dto/project.dto';
 import { ProjectService } from './project.service';
@@ -32,7 +32,7 @@ export class ProjectController {
         return this.projectService.update(params.id, projectDto)
     }
 
-    @Get('/:id')
+    @Delete('/:id')
     deleteOne(@Param() params: FindOneDto) {
         return this.projectService.remove(params.id);
     }
